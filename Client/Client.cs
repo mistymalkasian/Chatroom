@@ -13,7 +13,7 @@ namespace Client
         //member variables
         TcpClient clientSocket;
         NetworkStream stream;
-        bool isOn;
+        public bool isOn;
 
         //constructor
         public Client(string IP, int port)
@@ -21,31 +21,45 @@ namespace Client
             clientSocket = new TcpClient();
             clientSocket.Connect(IPAddress.Parse(IP), port);
             stream = clientSocket.GetStream();
-
-            Task.Run(() => Send());
-            Task.Run(() => Recieve());
-
+            isOn = true;
+            Parallel.Invoke(Send);
+            Parallel.Invoke(Receive);
         }
 
         //member methods
         public void Send()
         {
-            while (isOn == true)
+            try
             {
-            string messageString = UI.GetInput();
-            byte[] message = Encoding.ASCII.GetBytes(messageString);
-            stream.Write(message, 0, message.Count());
-            }
-        }
-        public void Recieve()
-        {
-            while (isOn == true)
-            {
-            byte[] recievedMessage = new byte[256];
-            stream.Read(recievedMessage, 0, recievedMessage.Length);
-            UI.DisplayMessage(Encoding.ASCII.GetString(recievedMessage));
-            }
+                while (isOn == true)
+                {
+                    string messageString = UI.GetInput();
+                    byte[] message = Encoding.ASCII.GetBytes(messageString);
+                    stream.Write(message, 0, message.Count());
+                }
 
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+           
+        }
+        public void Receive()
+        {
+            try
+            {
+                while (isOn == true)
+                {
+                    byte[] receivedMessage = new byte[256];
+                    stream.Read(receivedMessage, 0, receivedMessage.Length);
+                    UI.DisplayMessage(Encoding.ASCII.GetString(receivedMessage));
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

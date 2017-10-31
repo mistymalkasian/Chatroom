@@ -19,7 +19,7 @@ namespace Server
         //constructor
         public Server()
         {
-            server = new TcpListener(IPAddress.Parse("127.0.0.1"), 9999);
+            server = new TcpListener(IPAddress.Parse("192.168.0.128"), 9999);
             server.Start();
         }
 
@@ -27,7 +27,7 @@ namespace Server
         public void Run()
         {
             AcceptClient();
-            string message = client.Recieve();
+            string message = client.Receive();
             Respond(message);
         }
         private void AcceptClient()
