@@ -12,13 +12,18 @@ namespace Server
 {
     class Server
     {
+        //member variables
         public static Client client;
         TcpListener server;
+
+        //constructor
         public Server()
         {
             server = new TcpListener(IPAddress.Parse("127.0.0.1"), 9999);
             server.Start();
         }
+
+        //member methods
         public void Run()
         {
             AcceptClient();

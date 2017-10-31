@@ -15,5 +15,6 @@ namespace Client
             client.Recieve();
             Console.ReadLine();
         }
+
     }
 }

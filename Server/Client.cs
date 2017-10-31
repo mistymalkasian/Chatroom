@@ -9,15 +9,21 @@ namespace Server
 {
     class Client
     {
+        //member variables
         NetworkStream stream;
         TcpClient client;
         public string UserId;
+
+
+        //constructor
         public Client(NetworkStream Stream, TcpClient Client)
         {
             stream = Stream;
             client = Client;
             UserId = "495933b6-1762-47a1-b655-483510072e73";
         }
+
+        //member methods
         public void Send(string Message)
         {
             byte[] message = Encoding.ASCII.GetBytes(Message);
