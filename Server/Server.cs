@@ -14,11 +14,31 @@ namespace Server
     {
         public static Client client;
         TcpListener server;
+        bool isOn;
+
         public Server()
         {
             server = new TcpListener(IPAddress.Parse("192.168.0.135"), 9999);
             server.Start();
+            isOn = true;
+            Parallel.Invoke(ConstantlyListen);
         }
+
+        public void ConstantlyListen()
+        {
+            while (isOn == true)
+
+            {
+                server.Start();
+
+                if (server.Pending())
+
+                {
+                    Parallel.Invoke(AcceptClient);
+                }
+            }
+        }
+
         public void Run()
         {
             AcceptClient();
