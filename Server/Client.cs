@@ -20,16 +20,38 @@ namespace Server
         }
         public void Send(string Message)
         {
-            byte[] message = Encoding.ASCII.GetBytes(Message);
-            stream.Write(message, 0, message.Count());
+            while(true)
+            {
+                try
+                {
+                    byte[] message = Encoding.ASCII.GetBytes(Message);
+                    stream.Write(message, 0, message.Count());
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            
+            
         }
         public string Receive()
         {
-            byte[] receivedMessage = new byte[256];
-            stream.Read(receivedMessage, 0, receivedMessage.Length);
-            string receivedMessageString = Encoding.ASCII.GetString(receivedMessage);
-            Console.WriteLine(receivedMessageString);
-            return receivedMessageString;
+            while (true)    
+            {
+                try
+                {
+                    byte[] receivedMessage = new byte[256];
+                    stream.Read(receivedMessage, 0, receivedMessage.Length);
+                    string receivedMessageString = Encoding.ASCII.GetString(receivedMessage);
+                    Console.WriteLine(receivedMessageString);
+                    return receivedMessageString;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }           
         }
     }
 }

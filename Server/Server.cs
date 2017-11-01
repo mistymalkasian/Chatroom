@@ -20,7 +20,8 @@ namespace Server
         {
             server = new TcpListener(IPAddress.Any, 9999);
             isOn = true;
-            Parallel.Invoke(ConstantlyListen);
+            Dictionary<string, int> users = new Dictionary<string, int>();
+            Parallel.Invoke(ConstantlyListen);            
         }
 
         public void ConstantlyListen()
@@ -40,8 +41,8 @@ namespace Server
         {
             AcceptClient();
             string message = client.Receive();
-            Parallel.Invoke(message);
-            Respond(message);
+            Task.Run(() => Respond(message));
+            
         }
 
         private void AcceptClient()

@@ -38,6 +38,7 @@ namespace Client
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
+                Console.ReadLine();
             }
            
         }
@@ -55,6 +56,7 @@ namespace Client
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
+                Console.ReadLine();
             }
         }
     }
