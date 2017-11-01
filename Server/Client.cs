@@ -29,13 +29,14 @@ namespace Server
             byte[] message = Encoding.ASCII.GetBytes(Message);
             stream.Write(message, 0, message.Count());
         }
+
         public string Receive()
         {
             byte[] receivedMessage = new byte[256];
             stream.Read(receivedMessage, 0, receivedMessage.Length);
-            string recievedMessageString = Encoding.ASCII.GetString(receivedMessage);
-            Console.WriteLine(recievedMessageString);
-            return recievedMessageString;
+            string receivedMessageString = Encoding.ASCII.GetString(receivedMessage);
+            Console.WriteLine(receivedMessageString);
+            return receivedMessageString;
         }
 
     }

@@ -15,21 +15,43 @@ namespace Server
         //member variables
         public static Client client;
         TcpListener server;
+        bool isOn;
 
-        //constructor
+        //constructor      
         public Server()
         {
-            server = new TcpListener(IPAddress.Parse("192.168.0.128"), 9999);
+            server = new TcpListener(IPAddress.Parse("192.168.0.123"), 14234);
             server.Start();
+            isOn = true;
+            Parallel.Invoke(ConstantlyListen);
+            Parallel.Invoke(Run);
         }
-
+        
+        
+        
         //member methods
+        public void ConstantlyListen()
+        {
+            while (isOn == true)
+
+            {
+                server.Start();
+
+                if (server.Pending())
+
+                {
+                    Parallel.Invoke(AcceptClient);
+                }
+            }
+        }
+        
         public void Run()
         {
             AcceptClient();
             string message = client.Receive();
             Respond(message);
         }
+
         private void AcceptClient()
         {
             TcpClient clientSocket = default(TcpClient);
@@ -38,6 +60,7 @@ namespace Server
             NetworkStream stream = clientSocket.GetStream();
             client = new Client(stream, clientSocket);
         }
+
         private void Respond(string body)
         {
              client.Send(body);
