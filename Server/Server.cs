@@ -18,8 +18,7 @@ namespace Server
 
         public Server()
         {
-            server = new TcpListener(IPAddress.Parse("192.168.0.135"), 9999);
-            server.Start();
+            server = new TcpListener(IPAddress.Any, 9999);
             isOn = true;
             Parallel.Invoke(ConstantlyListen);
         }
@@ -27,24 +26,24 @@ namespace Server
         public void ConstantlyListen()
         {
             while (isOn == true)
-
             {
                 server.Start();
 
                 if (server.Pending())
-
                 {
                     Parallel.Invoke(AcceptClient);
                 }
-            }
+            }            
         }
 
         public void Run()
         {
             AcceptClient();
             string message = client.Receive();
+            Parallel.Invoke(message);
             Respond(message);
         }
+
         private void AcceptClient()
         {
             TcpClient clientSocket = default(TcpClient);
@@ -53,6 +52,7 @@ namespace Server
             NetworkStream stream = clientSocket.GetStream();
             client = new Client(stream, clientSocket);
         }
+
         private void Respond(string body)
         {
              client.Send(body);
