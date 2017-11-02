@@ -14,8 +14,6 @@ namespace Server
     {
         public static Client client;
         TcpListener server;
-        int userValue;
-        string username;
         bool isOn;
 
         public Server(ILogger log)
@@ -62,7 +60,7 @@ namespace Server
 
         public void LogUsername(Client client)
         {
-            Console.Write("{0} has joined!", username);
+            Console.Write("{0} has joined!", client.username);
         }
 
         public void LogMessages()
@@ -72,7 +70,7 @@ namespace Server
 
         public void LogLeaveMessage(Client client)
         {
-            Console.Write("{0} has left.", username);
+            Console.Write("{0} has left.", client.username);
         }
     }
 }
