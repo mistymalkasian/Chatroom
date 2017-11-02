@@ -19,13 +19,12 @@ namespace Server
         private Dictionary<Client, int> users;
 
 
-        public Server(ILogger log)
+        public Server(TextLogger textlogger)
         {
             server = new TcpListener(IPAddress.Any, 9999);
             isOn = true;
             users = new Dictionary<Client, int>();
             chats = new Queue<Message>();
-
             Parallel.Invoke(ConstantlyListen);            
         }
 
@@ -37,7 +36,7 @@ namespace Server
 
                 if (server.Pending())
                 {
-                    Parallel.Invoke(AcceptClient);
+                    Parallel.Invoke(AcceptClient);                    
                 }
             }            
         }
@@ -56,6 +55,8 @@ namespace Server
             Console.WriteLine("Connected");
             NetworkStream stream = clientSocket.GetStream();
             client = new Client(stream, clientSocket);
+            AddUserToDictionary(client);
+            NotifyOfNewUserToChat(client);
         }
 
         private void Respond(string body)

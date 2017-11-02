@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class ILoggable : ILogger
+    class TextLogger : ILogger
     {
 
         private object messageLock = new object();

@@ -7,31 +7,36 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class Client
+    public class Client
     {
         NetworkStream stream;
-        TcpClient client;
-        public string UserId;
+        public TcpClient client;
+        public string username;
+        public int IDNumber;
+
         public Client(NetworkStream Stream, TcpClient Client)
         {
             stream = Stream;
             client = Client;
-            UserId = "495933b6-1762-47a1-b655-483510072e73";
+            username = null;
+            IDNumber = 0;
         }
         public void Send(string Message)
         {
-            while(true)
+           while (true)
             {
                 try
                 {
                     byte[] message = Encoding.ASCII.GetBytes(Message);
                     stream.Write(message, 0, message.Count());
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-            }          
+            }
+               
+                     
         }
         public string Receive()
         {
@@ -50,6 +55,14 @@ namespace Server
                     Console.WriteLine(e.Message);
                 }
             }           
+        }
+
+        public string AskForUsername()
+        {
+            Send("Welcome to the chatroom! Please enter a username.");
+            username = Receive();
+            return username;
+
         }
     }
 }
