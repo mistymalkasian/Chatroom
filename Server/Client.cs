@@ -32,20 +32,15 @@ namespace Server
         //member methods
         public void Send(string Message)
         {
-           while (true)
-            {
-                try
-                {
-                    byte[] message = Encoding.ASCII.GetBytes(Message);
-                    stream.Write(message, 0, message.Count());
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-               
-                     
+             try
+              {
+                  byte[] message = Encoding.ASCII.GetBytes(Message);
+                  stream.Write(message, 0, message.Count());
+              }
+             catch (Exception e)
+              {
+                  Console.WriteLine(e.Message);
+              }         
         }
 
         public string Receive()
@@ -72,7 +67,6 @@ namespace Server
             Send("Welcome to the chatroom! Please enter a username.");
             username = Receive();
             return username;
-
         }
     }
 }

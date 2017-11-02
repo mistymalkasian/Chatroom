@@ -18,7 +18,11 @@ namespace Server
         bool isOn;
         private Queue<Message> chats;
         private Dictionary<Client, int> users;
+<<<<<<< HEAD
         private TextLogger textLogger;
+=======
+        object messageLock = new object();
+>>>>>>> 40d5ac7ddad585baf3f9d5ac024abc73f6bf4333
 
 
         //constructor      
@@ -30,6 +34,7 @@ namespace Server
             isOn = true;
             users = new Dictionary<Client, int>();
             chats = new Queue<Message>();
+<<<<<<< HEAD
             this.textLogger = textLogger;
             Parallel.Invoke(ConstantlyListen);            
         }
@@ -37,6 +42,20 @@ namespace Server
         
         
         //member methods
+=======
+            Parallel.Invoke(ConstantlyListen);
+            //Parallel.Invoke(ConstantlyDisplayChats);                  
+        }
+
+        //public void ConstantlyDisplayChats()
+        //{
+        //    while(true)
+        //    {
+        //        Console.WriteLine(chats);
+        //    }     
+        //}
+            
+>>>>>>> 40d5ac7ddad585baf3f9d5ac024abc73f6bf4333
         public void ConstantlyListen()
         {
             while (isOn == true)
@@ -64,6 +83,12 @@ namespace Server
             Console.WriteLine("Connected");
             NetworkStream stream = clientSocket.GetStream();
             client = new Client(stream, clientSocket);
+<<<<<<< HEAD
+=======
+            client.AskForUsername();
+            AddUserToDictionary(client);
+            NotifyOfNewUserToChat(client);
+>>>>>>> 40d5ac7ddad585baf3f9d5ac024abc73f6bf4333
         }
 
         private void Respond(string body)
@@ -86,6 +111,23 @@ namespace Server
         {
             Message newUserMessage = new Message(client, client.username + " has joined the chat!");
             chats.Enqueue(newUserMessage);
+        }
+
+        public void LogMessages(Client client, Message chatMessage)
+        {
+            lock (messageLock)
+            {
+                chats.Enqueue(chatMessage);
+            }
+        }
+
+        public void LogLeaveMessage(Client client)
+        {
+            lock (messageLock)
+            {
+                Message leaveMessage = new Message(client, client.username + " has left the chat.");
+                chats.Enqueue(leaveMessage);
+            }
         }
     }
 }

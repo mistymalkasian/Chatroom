@@ -19,8 +19,16 @@ namespace Client
         public Client(string IP, int port)
         {
             clientSocket = new TcpClient();
-            clientSocket.Connect(IPAddress.Parse(IP), port);
-            stream = clientSocket.GetStream();
+            try
+            {
+                clientSocket.Connect(IPAddress.Parse(IP), port);
+                stream = clientSocket.GetStream();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             isOn = true;
             Parallel.Invoke(Send);
             Parallel.Invoke(Receive);
