@@ -20,7 +20,7 @@ namespace Server
         //constructor      
         public Server()
         {
-            server = new TcpListener(IPAddress.Parse("192.168.0.123"), 14234);
+            server = new TcpListener(IPAddress.Any, 14234);
             server.Start();
             isOn = true;
             Parallel.Invoke(ConstantlyListen);
@@ -33,22 +33,21 @@ namespace Server
         public void ConstantlyListen()
         {
             while (isOn == true)
-
             {
                 server.Start();
 
                 if (server.Pending())
-
                 {
                     Parallel.Invoke(AcceptClient);
                 }
-            }
+            }            
         }
         
         public void Run()
         {
             AcceptClient();
             string message = client.Receive();
+            Parallel.Invoke( );
             Respond(message);
         }
 
