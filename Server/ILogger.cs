@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    interface ILogger
+    public interface ILogger
     {
+        void LogUsername(Client client);
+
+        void LogMessages();
+
+        void LogLeaveMessage(Client client);
+
     }
 }

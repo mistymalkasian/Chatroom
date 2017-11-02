@@ -12,6 +12,8 @@ namespace Client
     {
         TcpClient clientSocket;
         NetworkStream stream;
+        public string username;
+        public int IDNumber;
         public bool isOn;
 
         public Client(string IP, int port)
@@ -20,6 +22,7 @@ namespace Client
             clientSocket.Connect(IPAddress.Parse(IP), port);
             stream = clientSocket.GetStream();
             isOn = true;
+            IDNumber = 0;
             Parallel.Invoke(Send);
             Parallel.Invoke(Receive);
         }

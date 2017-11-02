@@ -31,9 +31,7 @@ namespace Server
                 {
                     Console.WriteLine(e.Message);
                 }
-            }
-            
-            
+            }          
         }
         public string Receive()
         {
