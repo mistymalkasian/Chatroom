@@ -13,8 +13,6 @@ namespace Client
         //member variables
         TcpClient clientSocket;
         NetworkStream stream;
-        public string username;
-        public int IDNumber;
         public bool isOn;
 
         //constructor
@@ -24,7 +22,6 @@ namespace Client
             clientSocket.Connect(IPAddress.Parse(IP), port);
             stream = clientSocket.GetStream();
             isOn = true;
-            IDNumber = 0;
             Parallel.Invoke(Send);
             Parallel.Invoke(Receive);
         }

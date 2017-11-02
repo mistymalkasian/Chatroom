@@ -16,17 +16,22 @@ namespace Server
         public static Client client;
         TcpListener server;
         bool isOn;
+        private Queue<Message> chats;
+        private Dictionary<Client, int> users;
+
 
 
         //constructor      
 
-        public Server(ILogger log)
+        public Server()
         {
             server = new TcpListener(IPAddress.Any, 14234);
             server.Start();
             isOn = true;
-            Dictionary<Client, int> users = new Dictionary<Client, int>();
-            Parallel.Invoke(ConstantlyListen);
+            users = new Dictionary<Client, int>();
+            chats = new Queue<Message>();
+
+            Parallel.Invoke(ConstantlyListen);            
         }
         
         
@@ -66,19 +71,21 @@ namespace Server
              client.Send(body);
         }
 
-        public void LogUsername(Client client)
+        private void AddMessageToQueue(Client client, Message message)
         {
-            Console.Write("{0} has joined!", client.username);
+            chats.Enqueue(message);
+        }
+     
+        private void AddUserToDictionary(Client client)
+        {
+            users.Add(client, client.IDNumber);
+            client.IDNumber++;
         }
 
-        public void LogMessages()
+        private void NotifyOfNewUserToChat(Client client)
         {
-
-        }
-
-        public void LogLeaveMessage(Client client)
-        {
-            Console.Write("{0} has left.", client.username);
+            Message newUserMessage = new Message(client, client.username + " has joined the chat!");
+            chats.Enqueue(newUserMessage);
         }
     }
 }

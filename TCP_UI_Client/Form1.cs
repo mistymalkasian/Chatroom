@@ -10,11 +10,36 @@ using System.Windows.Forms;
 
 namespace TCP_UI_Client
 {
-    public partial class Form1 : Form
+    public partial class Client1 : Form
     {
-        public Form1()
+        public Client1()
         {
             InitializeComponent();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            if ()
+        }
+
+        private void textIP_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textPort_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textMessage_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

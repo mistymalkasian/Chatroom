@@ -12,15 +12,19 @@ namespace Server
         //member variables
         NetworkStream stream;
         TcpClient client;
-        public string UserId;
-
+        //public string UserId;
+        public int IDNumber;
+        public string username;
 
         //constructor
         public Client(NetworkStream Stream, TcpClient Client)
         {
             stream = Stream;
             client = Client;
-            UserId = "495933b6-1762-47a1-b655-483510072e73";
+            IDNumber = 0;
+            username = null;
+
+           // UserId = "495933b6-1762-47a1-b655-483510072e73";
         }
 
         //member methods

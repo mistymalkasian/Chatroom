@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{3D7659EC-62A6-419C-89CE-058FD500026C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCP_GUI", "TCP_GUI\TCP_GUI.csproj", "{9E1DA208-FAFB-40DC-87DB-86C08C35317B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCP_UI_Client", "TCP_UI_Client\TCP_UI_Client.csproj", "{DF5EB7AE-D5A8-43B0-8A4F-EB290F2C7069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{3D7659EC-62A6-419C-89CE-058FD500026C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D7659EC-62A6-419C-89CE-058FD500026C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D7659EC-62A6-419C-89CE-058FD500026C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E1DA208-FAFB-40DC-87DB-86C08C35317B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E1DA208-FAFB-40DC-87DB-86C08C35317B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E1DA208-FAFB-40DC-87DB-86C08C35317B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E1DA208-FAFB-40DC-87DB-86C08C35317B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF5EB7AE-D5A8-43B0-8A4F-EB290F2C7069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF5EB7AE-D5A8-43B0-8A4F-EB290F2C7069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF5EB7AE-D5A8-43B0-8A4F-EB290F2C7069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF5EB7AE-D5A8-43B0-8A4F-EB290F2C7069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
