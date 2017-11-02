@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtChat = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtChat
             // 
-            this.textBox1.Location = new System.Drawing.Point(100, 90);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(483, 372);
-            this.textBox1.TabIndex = 0;
+            this.txtChat.Location = new System.Drawing.Point(100, 90);
+            this.txtChat.Multiline = true;
+            this.txtChat.Name = "txtChat";
+            this.txtChat.Size = new System.Drawing.Size(483, 372);
+            this.txtChat.TabIndex = 0;
             // 
             // label1
             // 
@@ -60,7 +60,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "192.168.0.123";
+            this.textBox2.Text = "192.168.0.119";
             // 
             // label2
             // 
@@ -79,14 +79,14 @@
             this.textBox3.TabIndex = 4;
             this.textBox3.Text = "14234";
             // 
-            // button1
+            // btnStart
             // 
-            this.button1.Location = new System.Drawing.Point(408, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnStart.Location = new System.Drawing.Point(408, 37);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 5;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -103,12 +103,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 570);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtChat);
             this.Name = "Client";
             this.Text = "Client";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -119,12 +119,12 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtChat;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button button2;
     }
 }

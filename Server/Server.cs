@@ -17,14 +17,16 @@ namespace Server
         TcpListener server;
         bool isOn;
 
+
         //constructor      
-        public Server()
+
+        public Server(ILogger log)
         {
             server = new TcpListener(IPAddress.Any, 14234);
             server.Start();
             isOn = true;
+            Dictionary<Client, int> users = new Dictionary<Client, int>();
             Parallel.Invoke(ConstantlyListen);
-            Parallel.Invoke(Run);
         }
         
         
@@ -47,8 +49,7 @@ namespace Server
         {
             AcceptClient();
             string message = client.Receive();
-            Parallel.Invoke( );
-            Respond(message);
+            Task.Run(() => Respond(message));
         }
 
         private void AcceptClient()
@@ -63,6 +64,21 @@ namespace Server
         private void Respond(string body)
         {
              client.Send(body);
+        }
+
+        public void LogUsername(Client client)
+        {
+            Console.Write("{0} has joined!", client.username);
+        }
+
+        public void LogMessages()
+        {
+
+        }
+
+        public void LogLeaveMessage(Client client)
+        {
+            Console.Write("{0} has left.", client.username);
         }
     }
 }
