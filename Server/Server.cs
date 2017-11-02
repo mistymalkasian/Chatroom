@@ -18,19 +18,19 @@ namespace Server
         bool isOn;
         private Queue<Message> chats;
         private Dictionary<Client, int> users;
-
+        private TextLogger textLogger;
 
 
         //constructor      
 
-        public Server()
+        public Server(TextLogger textLogger)
         {
             server = new TcpListener(IPAddress.Any, 14234);
             server.Start();
             isOn = true;
             users = new Dictionary<Client, int>();
             chats = new Queue<Message>();
-
+            this.textLogger = textLogger;
             Parallel.Invoke(ConstantlyListen);            
         }
         

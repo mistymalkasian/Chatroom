@@ -12,6 +12,7 @@ namespace TCP_UI_Client
 {
     public partial class Client1 : Form
     {
+        
         public Client1()
         {
             InitializeComponent();
@@ -19,12 +20,15 @@ namespace TCP_UI_Client
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            //System.Net.IPAddress ip = new System.Net.IPAddress(long.Parse(txthost.Text));
+            //server.Start(ip,Convert.ToInt32(txtPort))
 
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            if ()
+            //if (Server.constantlyListen)
+            //    Server.constantlyListen() = false;
         }
 
         private void textIP_TextChanged(object sender, EventArgs e)

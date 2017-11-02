@@ -10,7 +10,8 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            new Server().Run();
+            TextLogger TextLogger = new TextLogger();
+            new Server(TextLogger).Run();
             Console.ReadLine();
         }
     }

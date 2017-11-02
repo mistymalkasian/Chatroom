@@ -1,6 +1,6 @@
 ﻿namespace TCP_UI_Client
 {
-    partial class Client1
+    partial class Client1 
     {
         /// <summary>
         /// Required designer variable.
@@ -39,28 +39,30 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(589, 70);
+            this.btnStart.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnStart.Location = new System.Drawing.Point(608, 70);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(97, 28);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnStop
             // 
+            this.btnStop.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnStop.Location = new System.Drawing.Point(720, 70);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(97, 28);
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // label_IP
             // 
             this.label_IP.AutoSize = true;
-            this.label_IP.Location = new System.Drawing.Point(83, 74);
+            this.label_IP.Location = new System.Drawing.Point(109, 76);
             this.label_IP.Name = "label_IP";
             this.label_IP.Size = new System.Drawing.Size(24, 17);
             this.label_IP.TabIndex = 2;
@@ -69,7 +71,7 @@
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(339, 76);
+            this.labelPort.Location = new System.Drawing.Point(347, 76);
             this.labelPort.Name = "labelPort";
             this.labelPort.Size = new System.Drawing.Size(38, 17);
             this.labelPort.TabIndex = 3;
@@ -95,10 +97,10 @@
             // 
             // textMessage
             // 
-            this.textMessage.Location = new System.Drawing.Point(139, 130);
+            this.textMessage.Location = new System.Drawing.Point(112, 130);
             this.textMessage.Multiline = true;
             this.textMessage.Name = "textMessage";
-            this.textMessage.Size = new System.Drawing.Size(677, 476);
+            this.textMessage.Size = new System.Drawing.Size(704, 476);
             this.textMessage.TabIndex = 6;
             this.textMessage.TextChanged += new System.EventHandler(this.textMessage_TextChanged);
             // 
@@ -106,7 +108,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 682);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(860, 646);
             this.Controls.Add(this.textMessage);
             this.Controls.Add(this.textPort);
             this.Controls.Add(this.textIP);

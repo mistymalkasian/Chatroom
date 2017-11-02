@@ -37,15 +37,14 @@ namespace Client
                     byte[] message = Encoding.ASCII.GetBytes(messageString);
                     stream.Write(message, 0, message.Count());
                 }
-
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
                 Console.ReadLine();
-            }
-           
+            }        
         }
+
         public void Receive()
         {
             try
