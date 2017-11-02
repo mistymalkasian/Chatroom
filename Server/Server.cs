@@ -17,6 +17,7 @@ namespace Server
         bool isOn;
         private Queue<Message> chats;
         private Dictionary<Client, int> users;
+        object messageLock = new object();
 
 
         public Server(TextLogger textlogger)
@@ -25,9 +26,18 @@ namespace Server
             isOn = true;
             users = new Dictionary<Client, int>();
             chats = new Queue<Message>();
-            Parallel.Invoke(ConstantlyListen);            
+            Parallel.Invoke(ConstantlyListen);
+            //Parallel.Invoke(ConstantlyDisplayChats);                  
         }
 
+        //public void ConstantlyDisplayChats()
+        //{
+        //    while(true)
+        //    {
+        //        Console.WriteLine(chats);
+        //    }     
+        //}
+            
         public void ConstantlyListen()
         {
             while (isOn == true)
@@ -55,6 +65,7 @@ namespace Server
             Console.WriteLine("Connected");
             NetworkStream stream = clientSocket.GetStream();
             client = new Client(stream, clientSocket);
+            client.AskForUsername();
             AddUserToDictionary(client);
             NotifyOfNewUserToChat(client);
         }
@@ -79,6 +90,23 @@ namespace Server
         {
             Message newUserMessage = new Message(client, client.username + " has joined the chat!");
             chats.Enqueue(newUserMessage);
+        }
+
+        public void LogMessages(Client client, Message chatMessage)
+        {
+            lock (messageLock)
+            {
+                chats.Enqueue(chatMessage);
+            }
+        }
+
+        public void LogLeaveMessage(Client client)
+        {
+            lock (messageLock)
+            {
+                Message leaveMessage = new Message(client, client.username + " has left the chat.");
+                chats.Enqueue(leaveMessage);
+            }
         }
     }
 }
