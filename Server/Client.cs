@@ -52,12 +52,5 @@ namespace Server
                 }
             }           
         }
-
-        public string AskForUsername()
-        {
-            Send("Welcome to the chatroom! Please enter a username.");
-            username = Receive();
-            return username;
-        }
     }
 }
