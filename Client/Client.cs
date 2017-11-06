@@ -10,29 +10,24 @@ namespace Client
 {
     class Client
     {
+        //member variables
         TcpClient clientSocket;
         NetworkStream stream;
         public bool isOn;
 
+        //constructor
         public Client(string IP, int port)
         {
             clientSocket = new TcpClient();
-            try
-            {
-                clientSocket.Connect(IPAddress.Parse(IP), port);
-                stream = clientSocket.GetStream();
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
+            clientSocket.Connect(IPAddress.Parse(IP), port);
+            stream = clientSocket.GetStream();
             isOn = true;
             Parallel.Invoke(Send);
             Parallel.Invoke(Receive);
             AskForUsername();
         }
 
+        //member methods
         public void Send()
         {
             try
@@ -69,11 +64,13 @@ namespace Client
             }
         }
 
+
         public string AskForUsername()
         {
             Console.WriteLine("Welcome to the chatroom! Please enter a username.");
             var username = Console.ReadLine();
             return username;
         }
+    
     }
 }

@@ -8,11 +8,12 @@ namespace Server
 {
     public interface ILogger
     {
-        //void LogUsername(Client client, Queue<Message> chats);
+        void LogUsername();
 
-        //void LogMessages(Client client, Queue<Message> chats, Message chatMessage);
+        void LogMessages();
 
-        //void LogLeaveMessage(Client client, Queue<Message> chats);
+        void LogLeaveMessage();
+
 
     }
 }

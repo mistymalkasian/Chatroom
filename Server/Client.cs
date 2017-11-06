@@ -7,31 +7,46 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    public class Client
+    public class Client 
     {
+        //member variables
         NetworkStream stream;
         public TcpClient client;
-        public string username;
+        //public string UserId;
         public int IDNumber;
+        public string username;
+        
+
+        //constructor
 
         public Client(NetworkStream Stream, TcpClient Client)
         {
             stream = Stream;
             client = Client;
+            IDNumber = 1;
             username = null;
-            IDNumber = 0;
+            //Task.Run(() => Send());
+            // UserId = "495933b6-1762-47a1-b655-483510072e73";
+         
         }
+
+        //member methods
         public void Send(string Message)
         {
-             try
-              {
-                  byte[] message = Encoding.ASCII.GetBytes(Message);
-                  stream.Write(message, 0, message.Count());
-              }
-             catch (Exception e)
-              {
-                  Console.WriteLine(e.Message);
-              }         
+           while (true)
+            {
+                try
+                {
+                    byte[] message = Encoding.ASCII.GetBytes(Message);
+                    stream.Write(message, 0, message.Count());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+               
+                     
         }
 
         public string Receive()
@@ -52,5 +67,7 @@ namespace Server
                 }
             }           
         }
+
+
     }
 }

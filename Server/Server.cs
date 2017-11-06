@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -12,23 +13,32 @@ namespace Server
 {
     class Server
     {
+        //member variables
         public static Client client;
         TcpListener server;
         bool isOn;
         private Queue<Message> chats;
         private Dictionary<Client, int> users;
+        private TextLogger textLogger;
         object messageLock = new object();
 
+        //constructor      
 
-        public Server(TextLogger textlogger)
+        public Server(TextLogger textLogger)
         {
-            server = new TcpListener(IPAddress.Any, 9999);
+            server = new TcpListener(IPAddress.Any, 14234);
+            server.Start();
             isOn = true;
             users = new Dictionary<Client, int>();
             chats = new Queue<Message>();
-            Parallel.Invoke(ConstantlyListen);             
+            this.textLogger = textLogger;
+            Parallel.Invoke(ConstantlyListen);
+            Parallel.Invoke(Run);          
         }
-            
+        
+        
+        
+        //member methods    
         public void ConstantlyListen()
         {
             while (isOn == true)
@@ -37,11 +47,11 @@ namespace Server
 
                 if (server.Pending())
                 {
-                    Parallel.Invoke(AcceptClient);                    
+                    Parallel.Invoke(AcceptClient);
                 }
             }            
         }
-
+        
         public void Run()
         {
             AcceptClient();
@@ -63,7 +73,6 @@ namespace Server
 
         public void DisplayAllMessages(Client client)
         {
-
             while (true)
             {
                 if (chats.Count() <= (0))
@@ -79,7 +88,7 @@ namespace Server
                             }
                         }
                     }
-                }
+                }           
             }
         }
 
@@ -117,8 +126,23 @@ namespace Server
             lock (messageLock)
             {
                 chats.Enqueue(chatMessage);
+
             }
         }
+
+        public void DisplayTime()
+        {
+            DateTime localDate = DateTime.Now;
+            string[] cultureNames = { "en-US" }; 
+            foreach (var cultureName in cultureNames)
+            {
+                var culture = new CultureInfo(cultureName);
+                Console.WriteLine("{0}: {1}", cultureName,
+                                  localDate.ToString(culture));
+            }
+        }
+        
+
 
         public void LogLeaveMessage(Client client)
         {
