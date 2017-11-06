@@ -24,6 +24,7 @@ namespace Client
             isOn = true;
             Parallel.Invoke(Send);
             Parallel.Invoke(Receive);
+            AskForUsername();
         }
 
         //member methods
@@ -63,5 +64,13 @@ namespace Client
             }
         }
 
+
+        public string AskForUsername()
+        {
+            Console.WriteLine("Welcome to the chatroom! Please enter a username.");
+            var username = Console.ReadLine();
+            return username;
+        }
+    
     }
 }

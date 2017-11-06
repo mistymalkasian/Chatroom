@@ -38,7 +38,7 @@ namespace Server
         
         
         
-        //member methods
+        //member methods    
         public void ConstantlyListen()
         {
             while (isOn == true)
@@ -66,49 +66,50 @@ namespace Server
             Console.WriteLine("Connected");
             NetworkStream stream = clientSocket.GetStream();
             client = new Client(stream, clientSocket);
-            client.AskForUsername();
+            Task.Run(() => DisplayAllMessages(client));
             AddUserToDictionary(client);
             NotifyOfNewUserToChat(client);
         }
 
         public void DisplayAllMessages(Client client)
         {
-                while (true)
+            while (true)
+            {
+                if (chats.Count() <= (0))
                 {
-                    if (chats.Count() <= (0))
+                    Message msg = RemoveMessagesFromQueue();
+                    lock (messageLock)
                     {
-                        Message msg = RemoveMessagesFromQueue();
-                        lock (messageLock)
+                        foreach (KeyValuePair<Client, int> user in users)
                         {
-                            foreach (KeyValuePair<Client, int> user in users)
+                            foreach (Message chat in chats)
                             {
-                                foreach (Message chat in chats)
-                                {
-                                    client.Send(msg.Body);
-                                }
+                                client.Send(msg.Body);
                             }
                         }
                     }
-                }
-            
+                }           
+            }
         }
-
-
 
         private void Respond(string body)
         {
              client.Send(body);
+        }
+        private void AddUserToDictionary(Client client)
+        {
+            users.Add(client, client.IDNumber);
+            client.IDNumber++;
         }
 
         private void AddMessageToQueue(Client client, Message message)
         {
             chats.Enqueue(message);
         }
-     
-        private void AddUserToDictionary(Client client)
+
+        private Message RemoveMessagesFromQueue()
         {
-            users.Add(client, client.IDNumber);
-            client.IDNumber++;
+            return chats.Dequeue();
         }
 
         private void NotifyOfNewUserToChat(Client client)
