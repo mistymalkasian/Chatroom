@@ -1,5 +1,0 @@
-C:\Users\Michael\OneDrive\DevCodeCamp\C#\Chatroom\Client\bin\Debug\Client.exe.config
-C:\Users\Michael\OneDrive\DevCodeCamp\C#\Chatroom\Client\bin\Debug\Client.exe
-C:\Users\Michael\OneDrive\DevCodeCamp\C#\Chatroom\Client\bin\Debug\Client.pdb
-C:\Users\Michael\OneDrive\DevCodeCamp\C#\Chatroom\Client\obj\Debug\Client.exe
-C:\Users\Michael\OneDrive\DevCodeCamp\C#\Chatroom\Client\obj\Debug\Client.pdb

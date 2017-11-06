@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    public class Client
+    public class Client 
     {
         //member variables
         NetworkStream stream;
@@ -15,6 +15,7 @@ namespace Server
         //public string UserId;
         public int IDNumber;
         public string username;
+        
 
         //constructor
 
@@ -22,25 +23,30 @@ namespace Server
         {
             stream = Stream;
             client = Client;
-            IDNumber = 0;
+            IDNumber = 1;
             username = null;
-
-           // UserId = "495933b6-1762-47a1-b655-483510072e73";
-
+            //Task.Run(() => Send());
+            // UserId = "495933b6-1762-47a1-b655-483510072e73";
+         
         }
 
         //member methods
         public void Send(string Message)
         {
-             try
-              {
-                  byte[] message = Encoding.ASCII.GetBytes(Message);
-                  stream.Write(message, 0, message.Count());
-              }
-             catch (Exception e)
-              {
-                  Console.WriteLine(e.Message);
-              }         
+           while (true)
+            {
+                try
+                {
+                    byte[] message = Encoding.ASCII.GetBytes(Message);
+                    stream.Write(message, 0, message.Count());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+               
+                     
         }
 
         public string Receive()
@@ -62,11 +68,13 @@ namespace Server
             }           
         }
 
+
         public string AskForUsername()
         {
             Send("Welcome to the chatroom! Please enter a username.");
             username = Receive();
             return username;
         }
+
     }
 }

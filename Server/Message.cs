@@ -20,8 +20,7 @@ namespace Server
             sender = Sender;
             this.Body = Body;
             IDNumber = sender.IDNumber;
-        }
 
-        //member methods
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -18,12 +19,8 @@ namespace Server
         bool isOn;
         private Queue<Message> chats;
         private Dictionary<Client, int> users;
-<<<<<<< HEAD
         private TextLogger textLogger;
-=======
         object messageLock = new object();
->>>>>>> 40d5ac7ddad585baf3f9d5ac024abc73f6bf4333
-
 
         //constructor      
 
@@ -34,28 +31,14 @@ namespace Server
             isOn = true;
             users = new Dictionary<Client, int>();
             chats = new Queue<Message>();
-<<<<<<< HEAD
             this.textLogger = textLogger;
-            Parallel.Invoke(ConstantlyListen);            
+            Parallel.Invoke(ConstantlyListen);
+            Parallel.Invoke(Run);          
         }
         
         
         
         //member methods
-=======
-            Parallel.Invoke(ConstantlyListen);
-            //Parallel.Invoke(ConstantlyDisplayChats);                  
-        }
-
-        //public void ConstantlyDisplayChats()
-        //{
-        //    while(true)
-        //    {
-        //        Console.WriteLine(chats);
-        //    }     
-        //}
-            
->>>>>>> 40d5ac7ddad585baf3f9d5ac024abc73f6bf4333
         public void ConstantlyListen()
         {
             while (isOn == true)
@@ -83,13 +66,34 @@ namespace Server
             Console.WriteLine("Connected");
             NetworkStream stream = clientSocket.GetStream();
             client = new Client(stream, clientSocket);
-<<<<<<< HEAD
-=======
             client.AskForUsername();
             AddUserToDictionary(client);
             NotifyOfNewUserToChat(client);
->>>>>>> 40d5ac7ddad585baf3f9d5ac024abc73f6bf4333
         }
+
+        public void DisplayAllMessages(Client client)
+        {
+                while (true)
+                {
+                    if (chats.Count() <= (0))
+                    {
+                        Message msg = RemoveMessagesFromQueue();
+                        lock (messageLock)
+                        {
+                            foreach (KeyValuePair<Client, int> user in users)
+                            {
+                                foreach (Message chat in chats)
+                                {
+                                    client.Send(msg.Body);
+                                }
+                            }
+                        }
+                    }
+                }
+            
+        }
+
+
 
         private void Respond(string body)
         {
@@ -118,8 +122,23 @@ namespace Server
             lock (messageLock)
             {
                 chats.Enqueue(chatMessage);
+
             }
         }
+
+        public void DisplayTime()
+        {
+            DateTime localDate = DateTime.Now;
+            string[] cultureNames = { "en-US" }; 
+            foreach (var cultureName in cultureNames)
+            {
+                var culture = new CultureInfo(cultureName);
+                Console.WriteLine("{0}: {1}", cultureName,
+                                  localDate.ToString(culture));
+            }
+        }
+        
+
 
         public void LogLeaveMessage(Client client)
         {
