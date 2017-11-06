@@ -68,7 +68,7 @@ namespace Server
             {
                 if (chats.Count() <= (0))
                 {
-                    Message msg = RemoveMessagesFromQueue();
+                    Message msg = RemoveMessageFromQueue();
                     lock (messageLock)
                     {
                         foreach (KeyValuePair<Client, int> user in users)
@@ -98,15 +98,18 @@ namespace Server
             chats.Enqueue(message);
         }
 
-        private Message RemoveMessagesFromQueue()
+        private Message RemoveMessageFromQueue()
         {
             return chats.Dequeue();
         }
 
         private void NotifyOfNewUserToChat(Client client)
         {
-            Message newUserMessage = new Message(client, client.username + " has joined the chat!");
-            chats.Enqueue(newUserMessage);
+            lock(messageLock)
+            {
+                Message newUserMessage = new Message(client, client.username + " has joined the chat!");
+                chats.Enqueue(newUserMessage);
+            }
         }
 
         public void LogMessages(Client client, Message chatMessage)
